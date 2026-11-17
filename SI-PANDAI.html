@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0F766E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SI-PANDAI">
+<title>SI-PANDAI - Sistem Informasi Pasien Dialisis untuk Edukasi dan Informasi</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F1F5F9;--card:#fff;--ink:#0F172A;--mut:#475569;--line:#E2E8F0;--pri:#0F766E;--onpri:#fff;--tint:#E6F4F2;--warn:#B84A00;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1220;--card:#111B2E;--ink:#E2E8F0;--mut:#94A3B8;--line:#243049;--pri:#2DD4BF;--onpri:#042F2E;--tint:#13293A}}
+:root[data-theme="dark"]{--bg:#0B1220;--card:#111B2E;--ink:#E2E8F0;--mut:#94A3B8;--line:#243049;--pri:#2DD4BF;--onpri:#042F2E;--tint:#13293A}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:1.1rem;line-height:1.6;padding-bottom:150px}
+a{color:var(--pri)}
+:focus-visible{outline:3px solid var(--warn);outline-offset:2px}
+header{background:var(--card);border-bottom:1px solid var(--line);padding:14px 20px;display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;justify-content:space-between}
+.brand{font-weight:700;font-size:1.4rem;color:var(--pri);text-decoration:none}
+.fs{display:flex;gap:6px}
+.fs button,.btn{min-height:44px;min-width:44px;font:inherit;font-weight:700;border-radius:10px;border:2px solid var(--pri);background:var(--card);color:var(--pri);padding:0 14px;cursor:pointer}
+.btn.p{background:var(--pri);color:var(--onpri)}
+.shell{display:flex;max-width:1280px;margin:0 auto}main{flex:1;min-width:0;max-width:1000px;padding:28px 20px}
+h1{font-size:2.2rem;line-height:1.2;margin:0 0 12px}
+h2{font-size:1.6rem;margin:32px 0 12px}
+h3{font-size:1.25rem;margin:0 0 6px}
+.lead{font-size:1.25rem;color:var(--mut);max-width:680px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card p{margin:0 0 12px}
+.big{display:block;padding:20px;border-radius:14px;background:var(--tint);text-decoration:none;color:var(--ink);font-weight:700;font-size:1.25rem}
+.big span{display:block;font-weight:400;font-size:1rem;color:var(--mut)}
+.big.p{background:var(--pri);color:var(--onpri)}.big.p span{color:inherit}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:0 0 12px}
+summary{cursor:pointer;font-weight:700;font-size:1.2rem;padding:16px 20px;min-height:44px}
+details>div{padding:0 20px 16px}
+.key{background:var(--tint);border-radius:10px;padding:12px 16px;margin:12px 0 0}
+.warn{background:var(--warn);color:#fff;border-radius:14px;padding:20px 24px}
+.warn a{color:#fff}
+.bar{height:22px;border-radius:11px;background:var(--line);overflow:hidden;margin:12px 0}
+.bar i{display:block;height:100%;width:0;background:var(--pri);transition:width .3s}
+.bar.over i{background:var(--warn)}
+input[type=number]{font:inherit;min-height:44px;width:120px;padding:0 10px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.hmw{overflow-x:auto;margin:12px 0}.hm{border-collapse:collapse;width:100%;min-width:420px;font-size:.95rem}.hm th,.hm td{border:3px solid var(--card);padding:8px;text-align:center;color:#0F172A}.hm th{background:var(--tint);color:var(--ink)}.hm .l{background:#CDEBD3}.hm .m{background:#FFF0A8}.hm .h{background:#FFC48A}.hm .v{background:#F4A3A0}
+#hasil{font-weight:700}
+select{font:inherit;min-height:44px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:15}
+.side{display:none;width:240px;flex:none;padding:24px 16px;position:sticky;top:76px;align-self:flex-start}
+.side a,.bot a{text-decoration:none;font-weight:700;transition:background .2s,color .2s,transform .15s}
+.side a{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;color:var(--ink);margin-bottom:4px}
+.side a:hover{background:var(--tint);transform:translateX(2px)}
+.side a[aria-current=page],.bot a[aria-current=page]{background:var(--tint);color:var(--pri)}
+.side a.dr{background:var(--warn);color:#fff;margin-top:12px}
+.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.bot{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.bot a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px;font-size:.72rem;color:var(--mut)}
+.sos{bottom:calc(62px + env(safe-area-inset-bottom,0px));padding:8px 16px;font-size:.95rem}
+@media(min-width:900px){.side{display:block}.bot{display:none}.sos{bottom:0;left:240px;padding:10px 20px}body{padding-bottom:70px}}
+.card,.big,details{transition:box-shadow .2s,transform .2s}
+.card:hover,.big:hover{box-shadow:0 8px 24px rgba(15,23,42,.10);transform:translateY(-2px)}
+.btn,.fs button{transition:transform .15s,background .2s}.btn:active{transform:scale(.97)}
+.pg:not([hidden]){animation:fd .3s ease}
+@keyframes fd{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin:12px 0 20px}
+.stat span{display:block;color:var(--mut);font-size:.9rem}.stat b{display:block;font-size:1.7rem;line-height:1.25}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.ph{border:2px dashed var(--line);border-radius:14px;padding:16px;color:var(--mut)}
+ul{padding-left:22px;margin:0 0 12px}
+footer{border-top:1px solid var(--line);padding:24px 20px;color:var(--mut);font-size:1rem;max-width:1000px;margin:0 auto}
+.sos{position:fixed;left:0;right:0;bottom:0;background:var(--warn);color:#fff;padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:700}
+.sos a{color:#fff}
+@media(prefers-reduced-motion:reduce){.bar i{transition:none}}
+.pf{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.pf label{display:block;font-weight:600;font-size:1rem}.pf input[type=number],.pf input[type=text],.pf select{width:100%;margin-top:4px;font:inherit;min-height:44px;padding:0 10px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.bw{position:relative;padding-top:16px;margin-top:8px}.bmibar{display:flex;height:22px;border-radius:11px;overflow:hidden}.bmibar i{display:block}#bmk{position:absolute;top:0;left:0;transform:translateX(-50%);width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-top:13px solid var(--ink);display:none;transition:left .3s}
+.tk{position:relative;height:20px;font-size:.85rem;color:var(--mut)}.tk span{position:absolute;transform:translateX(-50%)}
+.lg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px 16px;font-size:.95rem;margin-top:8px}.lg span{display:flex;align-items:center;gap:8px}.lg i{width:16px;height:16px;border-radius:4px;flex:none}
+@media(prefers-reduced-motion:reduce){#bmk{transition:none}}
+.lr{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.lr:last-of-type{border-bottom:0}.lr .nm{display:block;font-weight:700}.lr .nr{display:block;font-size:.95rem;color:var(--mut)}
+.lr input{width:130px;font:inherit;min-height:44px;padding:0 10px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);text-align:right}
+.lr .bd{grid-column:1/-1}.bd{display:inline-block;padding:3px 12px;border-radius:999px;font-weight:700;font-size:.95rem}.bd:empty{display:none}
+.bd.n{background:#15803D;color:#fff}.bd.h{background:#DC2626;color:#fff}.bd.l{background:#FACC15;color:#422006}.bd.x{background:var(--tint);color:var(--mut);font-weight:600}
+</style>
+</head>
+<body>
+<header><a class="brand" href="#beranda">SI-PANDAI</a><div class="row" style="gap:8px"><button class="btn" type="button" id="th" aria-label="Ganti tema terang atau gelap">Tema</button><div class="fs" role="group" aria-label="Ukuran huruf"><button type="button" id="fm" aria-label="Perkecil huruf">A-</button><button type="button" id="fp" aria-label="Perbesar huruf">A+</button></div></div></header>
+<div class="shell"><aside class="side"><nav aria-label="Menu utama"><a href="#beranda"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Beranda</a><a href="#mengenal"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19a2 2 0 0 1 2-2h13"/></svg>Mengenal HD</a><a href="#makan"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Makan &amp; Minum</a><a href="#perawatan"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.5-8 11-8 11z"/></svg>Perawatan Diri</a><a href="#komunitas"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9.5 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM21 21v-2a4 4 0 0 0-3-3.9"/></svg>Komunitas &amp; Layanan</a><a href="#lab"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6l-5.5 9.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/></svg>Lab</a><a class="dr" href="#darurat"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2zM12 10v5M12 18v.5"/></svg>Darurat</a></nav></aside><main>
+
+<section class="pg" id="beranda">
+<p style="margin:0 0 8px;font-size:1.05rem;color:var(--mut)"><strong style="color:var(--pri)">SI-PANDAI</strong> (Sistem Informasi Pasien Dialisis untuk Edukasi dan Informasi)</p>
+<h1>Belajar memahami hemodialisis, kapan pun Anda butuh.</h1>
+<p class="lead">Penjelasan sederhana tentang cuci darah, makanan, cairan, dan perawatan diri, disusun oleh dokter spesialis penyakit dalam.</p>
+<p style="color:var(--mut);font-size:1rem;margin:-4px 0 0">Disusun oleh Puguh Widagdo, SpPD-FINASIM, Fellowship Hemodialisis bersama Tim HD RSUD RT. NOTOPURO SIDOARJO</p>
+<div class="card" id="inst" style="margin:12px 0 16px"><div class="row" style="justify-content:space-between;gap:12px"><div><strong>Pasang di HP Anda</strong><div style="color:var(--mut);font-size:1rem">Buka seperti aplikasi, langsung dari layar utama.</div></div><button class="btn p" type="button" id="instbtn">Pasang aplikasi</button></div>
+<div id="insth" hidden style="margin-top:12px"><p><strong>Android (Chrome):</strong> ketuk menu &#8942; di kanan atas, lalu pilih Instal aplikasi atau Tambahkan ke layar utama.</p><p><strong>iPhone dan iPad (Safari):</strong> ketuk tombol Bagikan, lalu pilih Tambah ke Layar Utama.</p><p style="margin:0;color:var(--mut);font-size:1rem">Bila pilihan tidak muncul, buka halaman ini langsung di Chrome atau Safari, bukan dari dalam aplikasi lain.</p></div></div>
+<div class="grid" style="margin:24px 0">
+<a class="big p" href="#mengenal">Saya baru mulai HD<span>Mulai dari dasar, langkah demi langkah</span></a>
+<a class="big" href="#makan">Diet &amp; cairan<span>Apa yang boleh dimakan dan diminum</span></a>
+<a class="big" href="#lab">Lab<span>Catat nilai lab dan lihat statusnya</span></a>
+<a class="big" href="#darurat" style="background:var(--warn);color:#fff">Darurat<span style="color:#fff">Tanda bahaya yang harus segera ke IGD</span></a>
+</div>
+<div class="card" id="prof"><h3>Profil pasien</h3>
+<div class="pf">
+<label>Nama<input id="pn" type="text" autocomplete="off"></label>
+<label>Usia (tahun)<input id="pu" type="number" min="0" max="120" inputmode="numeric"></label>
+<label>Jenis kelamin<select id="pj"><option value="">Pilih</option><option value="Laki-laki">Laki-laki</option><option value="Perempuan">Perempuan</option></select></label>
+<label>Berat badan (kg)<input id="pb" type="number" min="20" max="300" step="0.1" inputmode="decimal"></label>
+<label>Tinggi badan (cm)<input id="pt" type="number" min="100" max="250" step="0.1" inputmode="decimal"></label>
+</div>
+<h3 style="margin-top:20px">Indeks massa tubuh (BMI)</h3>
+<div class="row" style="align-items:baseline;gap:8px 12px"><b id="bmiv" style="font-size:1.7rem">-</b><span style="color:var(--mut)">kg/m²</span><strong id="bmic" aria-live="polite">Isi berat dan tinggi badan.</strong></div>
+<div class="bw"><div id="bmk"></div><div class="bmibar" role="img" aria-label="Skala BMI kriteria Asia: biru kurang dari 18,5, hijau 18,5 sampai 22,9, kuning 23 sampai 24,9, merah 25 atau lebih"><i style="flex:6.5;background:#3B82F6"></i><i style="flex:4.5;background:#22C55E"></i><i style="flex:2;background:#FACC15"></i><i style="flex:15;background:#EF4444"></i></div></div>
+<div class="tk" aria-hidden="true"><span style="left:23.2%">18,5</span><span style="left:39.3%">23</span><span style="left:46.4%">25</span></div>
+<div class="lg"><span><i style="background:#3B82F6"></i>Kurang (&lt; 18,5)</span><span><i style="background:#22C55E"></i>Normal (18,5 - 22,9)</span><span><i style="background:#FACC15"></i>Berat badan lebih (23 - 24,9)</span><span><i style="background:#EF4444"></i>Obesitas (&ge; 25)</span></div>
+<p style="margin:12px 0 0;color:var(--mut);font-size:1rem">Memakai kriteria BMI Asia-Pasifik. Bila menjalani HD, gunakan berat badan kering (setelah HD). Data hanya tersimpan di perangkat ini.</p>
+<div style="margin-top:16px"><button class="btn" type="button" id="rstbtn">Mulai baru (hapus semua data)</button>
+<div id="rstask" class="key" hidden><p>Semua data di perangkat ini akan dihapus: profil, nilai lab, dan catatan berat badan. Data tidak dapat dikembalikan. Lanjutkan?</p><div class="row"><button class="btn p" type="button" id="rstyes">Ya, hapus</button><button class="btn" type="button" id="rstno">Batal</button></div></div></div>
+</div>
+<div class="card" style="margin-top:16px"><h3>Tips hari ini</h3><p id="tip" style="margin:0"></p></div>
+<h2>Ringkasan hari ini</h2>
+<div class="stats">
+<div class="card stat"><span>Cairan hari ini</span><b id="s1">0 ml</b></div>
+<div class="card stat"><span>Sisa batas cairan</span><b id="s2">-</b></div>
+<div class="card stat"><span>Berat badan terakhir</span><b id="s3">-</b><span id="s3d"></span></div>
+</div>
+<div class="card"><h3>Grafik berat badan</h3>
+<div class="row"><label for="bb">Berat hari ini (kg):</label><input id="bb" type="number" min="20" max="250" step="0.1"><button class="btn p" id="bsv" type="button">Simpan</button></div>
+<svg id="chart" viewBox="0 0 320 130" role="img" aria-label="Grafik berat badan 7 catatan terakhir" style="width:100%;height:auto;margin-top:12px"></svg>
+<p style="margin:8px 0 0;color:var(--mut);font-size:.95rem">Catatan hanya tersimpan di perangkat ini. Bicarakan perubahan berat badan dengan perawat atau dokter HD Anda.</p></div>
+<h2>Pencatat cairan hari ini</h2>
+<div class="card">
+<div class="row"><label for="lim">Batas cairan saya (ml):</label><input id="lim" type="number" min="0" step="50" value="1000"></div>
+<div class="bar" id="bar" role="progressbar" aria-label="Cairan terpakai" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="fill"></i></div>
+<p id="stat" style="margin:0 0 12px" aria-live="polite"></p>
+<div class="row"><button class="btn p" type="button" data-add="100">+100 ml</button><button class="btn p" type="button" data-add="200">+200 ml</button><button class="btn p" type="button" data-add="250">+250 ml</button><button class="btn" type="button" id="rst">Ulangi dari nol</button></div>
+<p style="margin:12px 0 0;color:var(--mut);font-size:1rem">Angka batas ditentukan dokter atau perawat HD Anda. Alat ini hanya membantu mencatat.</p>
+</div>
+<h2>Topik</h2>
+<div class="grid">
+<div class="card"><h3>Mengenal HD</h3><p>Apa itu gagal ginjal, alur satu sesi, dan hasil lab.</p><a href="#mengenal">Buka</a></div>
+<div class="card"><h3>Makan &amp; Minum</h3><p>Cairan, kalium, fosfat, garam, dan protein.</p><a href="#makan">Buka</a></div>
+<div class="card"><h3>Perawatan Diri</h3><p>Akses, obat, keluhan, aktivitas, ibadah.</p><a href="#perawatan">Buka</a></div>
+<div class="card"><h3>Komunitas &amp; Layanan</h3><p>Keluarga, dukungan jiwa, BPJS, unit HD.</p><a href="#komunitas">Buka</a></div>
+</div>
+</section>
+
+<section class="pg" id="mengenal" hidden>
+<h1>Mengenal HD</h1>
+<p class="lead">Dasar-dasar yang perlu Anda tahu, dijelaskan pelan-pelan.</p>
+<details open><summary>Apa itu gagal ginjal dan hemodialisis?</summary><div><p>Ginjal membuang limbah dan kelebihan air dari tubuh, serta menjaga keseimbangan garam dan mineral. Pada gagal ginjal tahap akhir, ginjal tidak lagi mampu melakukannya. Hemodialisis (HD, cuci darah) memakai mesin untuk membersihkan darah dari limbah dan kelebihan cairan, biasanya 2-3 kali seminggu.</p><div class="key"><strong>Poin penting:</strong> HD menggantikan sebagian fungsi ginjal, bukan menyembuhkan ginjal. Jadwal yang teratur sangat penting.</div></div></details>
+<details><summary>Seperti apa satu sesi HD?</summary><div><ul><li>Datang tepat waktu, timbang berat badan sebelum mulai</li><li>Perawat memeriksa tekanan darah dan menyiapkan akses</li><li>Darah dialirkan ke mesin, dibersihkan, lalu kembali ke tubuh</li><li>Sesi umumnya beberapa jam; Anda boleh beristirahat atau berbincang</li><li>Setelah selesai, akses dirawat dan berat badan ditimbang lagi</li></ul><p>Sampaikan segera kepada perawat bila pusing, kram, mual, atau dada tidak enak.</p></div></details>
+<details><summary>Pilihan terapi: HD, CAPD, transplantasi</summary><div><ul><li><strong>HD:</strong> dilakukan di unit HD dengan mesin dan tenaga kesehatan</li><li><strong>CAPD:</strong> cuci darah lewat perut, dilakukan sendiri di rumah</li><li><strong>Transplantasi ginjal:</strong> mengganti ginjal dengan ginjal donor</li></ul><p>Pilihan terbaik berbeda pada tiap orang. Diskusikan dengan dokter ginjal Anda.</p></div></details>
+<details><summary>Membaca hasil lab</summary><div><ul><li><strong>Ureum dan kreatinin:</strong> penanda penumpukan limbah</li><li><strong>Hemoglobin (Hb):</strong> menunjukkan ada tidaknya anemia, umum pada pasien HD</li><li><strong>Kalium:</strong> terlalu tinggi berbahaya bagi irama jantung</li><li><strong>Fosfat:</strong> terlalu tinggi dapat memengaruhi tulang dan pembuluh darah</li><li><strong>Kt/V:</strong> ukuran kecukupan HD</li></ul><p>Angka target tiap orang ditentukan dokter. Tanyakan arti hasil Anda saat kontrol.</p></div></details>
+<details><summary>Menilai fungsi ginjal: eGFR, cystatin C, uACR, risiko ginjal</summary><div>
+<h3>eGFR</h3>
+<p>eGFR adalah perkiraan seberapa banyak darah yang disaring ginjal setiap menit (satuan mL/menit/1,73 m²). Angkanya dihitung dari hasil darah (kreatinin, atau cystatin C), usia, dan jenis kelamin. Semakin rendah angkanya, semakin berkurang fungsi ginjal. eGFR dipakai untuk menentukan stadium G1 sampai G5. Pada pasien yang sudah menjalani HD, eGFR tidak lagi dipakai untuk menilai fungsi ginjal.</p>
+<ul><li><strong>G1:</strong> 90 atau lebih (normal atau tinggi)</li><li><strong>G2:</strong> 60-89 (turun ringan)</li><li><strong>G3a:</strong> 45-59 (turun ringan hingga sedang)</li><li><strong>G3b:</strong> 30-44 (turun sedang hingga berat)</li><li><strong>G4:</strong> 15-29 (turun berat)</li><li><strong>G5:</strong> kurang dari 15 (gagal ginjal)</li></ul>
+<h3>Cystatin C</h3>
+<p>Cystatin C adalah protein yang dibuat semua sel tubuh dan disaring ginjal. Kadarnya kurang dipengaruhi massa otot dan makanan dibanding kreatinin. Pemeriksaan ini berguna bila hasil kreatinin kurang dapat diandalkan, misalnya pada orang yang sangat berotot, otot sangat sedikit, lansia, gizi kurang, atau amputasi, dan untuk memastikan stadium ginjal. Dokter dapat menggabungkan kreatinin dan cystatin C agar eGFR lebih akurat.</p>
+<h3>uACR (rasio albumin terhadap kreatinin urine)</h3>
+<p>uACR mengukur kebocoran albumin (protein) ke dalam urine. Kebocoran ini tanda kerusakan ginjal dan juga menambah risiko penyakit jantung. Sampel yang paling dianjurkan adalah urine pertama pagi hari. Hasil yang tinggi sebaiknya diulang karena dapat dipengaruhi demam, infeksi saluran kemih, olahraga berat, atau menstruasi.</p>
+<ul><li><strong>A1:</strong> kurang dari 30 mg/g (normal hingga meningkat ringan)</li><li><strong>A2:</strong> 30-300 mg/g (meningkat sedang)</li><li><strong>A3:</strong> lebih dari 300 mg/g (meningkat berat)</li></ul>
+<h3>Risiko ginjal</h3>
+<p>Risiko ditentukan oleh gabungan stadium eGFR (G) dan kategori uACR (A). Semakin ke bawah dan ke kanan pada tabel, semakin tinggi risiko penurunan fungsi ginjal dan penyakit jantung.</p>
+<div class="hmw"><table class="hm"><caption style="text-align:left;padding:4px 0;color:var(--mut)">Peta risiko ginjal (KDIGO)</caption><tr><th></th><th>A1 (&lt;30)</th><th>A2 (30-300)</th><th>A3 (&gt;300)</th></tr>
+<tr><th>G1 (≥90)</th><td class="l">Rendah</td><td class="m">Sedang</td><td class="h">Tinggi</td></tr>
+<tr><th>G2 (60-89)</th><td class="l">Rendah</td><td class="m">Sedang</td><td class="h">Tinggi</td></tr>
+<tr><th>G3a (45-59)</th><td class="m">Sedang</td><td class="h">Tinggi</td><td class="v">Sangat tinggi</td></tr>
+<tr><th>G3b (30-44)</th><td class="h">Tinggi</td><td class="v">Sangat tinggi</td><td class="v">Sangat tinggi</td></tr>
+<tr><th>G4 (15-29)</th><td class="v">Sangat tinggi</td><td class="v">Sangat tinggi</td><td class="v">Sangat tinggi</td></tr>
+<tr><th>G5 (&lt;15)</th><td class="v">Sangat tinggi</td><td class="v">Sangat tinggi</td><td class="v">Sangat tinggi</td></tr></table></div>
+<div class="card"><h3>Cek kategori Anda</h3>
+<div class="row"><label for="ge">eGFR:</label><input id="ge" type="number" min="0" max="200" step="1"><label for="gu">uACR (mg/g):</label><input id="gu" type="number" min="0" step="1"><button class="btn p" type="button" id="gcek">Lihat kategori</button></div>
+<p id="hasil" aria-live="polite" style="margin:12px 0 0"></p></div>
+<div class="key"><strong>Perlu diingat:</strong> penyakit ginjal kronik ditegakkan bila kelainan menetap lebih dari 3 bulan, bukan dari satu kali pemeriksaan. Alat ini hanya gambaran edukasi dan bukan diagnosis. Bicarakan hasil Anda dengan dokter.</div>
+</div></details>
+</section>
+
+<section class="pg" id="makan" hidden>
+<h1>Makan &amp; Minum</h1>
+<p class="lead">Makanan dan cairan sangat memengaruhi kenyamanan Anda di antara dua sesi HD.</p>
+<details open><summary>Aturan cairan</summary><div><p>Air menumpuk di tubuh dan membuat bengkak, tekanan darah naik, serta sesak napas. Gambaran umum batas cairan: jumlah urine sehari ditambah sekitar 500-750 ml. Angka pastinya dari dokter.</p><p><strong>Dihitung sebagai cairan:</strong> air putih, teh, kopi, susu, kuah, sup, bubur, es batu, agar-agar, buah berair.</p><p><strong>Mengatasi haus:</strong> kurangi garam, minum dari gelas kecil, kumur tanpa menelan, kunyah permen karet tanpa gula, jaga kebersihan mulut. Timbang badan setiap pagi dan catat kenaikan di antara sesi HD.</p><p><a href="#beranda">Pakai pencatat cairan di Beranda</a></p></div></details>
+<details><summary>Kalium</summary><div>
+<p>Kalium adalah mineral yang mengatur kerja otot dan irama jantung. Ginjal yang sakit sulit membuangnya, sehingga kalium menumpuk di antara sesi HD. Kalium terlalu tinggi dapat menyebabkan lemas mendadak, kesemutan, atau detak jantung melambat dan tidak teratur, bahkan kadang tanpa gejala sama sekali. Karena itu dokter memeriksanya rutin lewat darah.</p>
+<h3>Umumnya tinggi kalium (batasi)</h3>
+<p>Pisang, jeruk, alpukat, tomat, kentang, ubi, bayam, kelapa muda, jus buah pekat, dan buah kering. Hindari belimbing karena dapat berbahaya bagi pasien gagal ginjal.</p>
+<h3>Umumnya lebih rendah kalium</h3>
+<p>Apel, pir, nanas, stroberi, kol, timun, dan labu siam, dalam porsi sedang.</p>
+<h3>Tips mengurangi kalium dari sayuran</h3>
+<ul><li>Potong kecil, rendam dalam air hangat beberapa jam, lalu buang air rendamannya</li><li>Rebus dengan banyak air dan buang air rebusannya</li><li>Jangan minum kuah sayur atau kuah sup</li></ul>
+<h3>Yang sering terlewat</h3>
+<ul><li>Garam pengganti (berbahan kalium klorida) sebaiknya dihindari</li><li>Jus buah, minuman isotonik, dan air kelapa</li><li>Hari setelah jeda HD terpanjang adalah saat kalium paling mudah naik; lebih berhati-hati dengan makanan</li></ul>
+<div class="key"><strong>Segera ke IGD</strong> bila lemas mendadak, tungkai terasa lumpuh, atau jantung berdebar sangat pelan atau tidak teratur. Batas kalium aman Anda ditentukan dokter.</div>
+</div></details>
+<details><summary>Fosfat</summary><div>
+<p>Fosfat adalah mineral yang menjaga kekuatan tulang. Ginjal sehat membuang kelebihannya; pada pasien HD, fosfat menumpuk dan HD hanya membuang sebagian. Fosfat tinggi dalam jangka panjang dapat menimbulkan gatal, nyeri tulang dan sendi, serta pengapuran pembuluh darah yang membebani jantung.</p>
+<h3>Sumber fosfat</h3>
+<ul><li><strong>Alami:</strong> susu, keju, yoghurt, kacang-kacangan, cokelat, jeroan, kuning telur</li><li><strong>Tambahan pada makanan olahan:</strong> sosis, nugget, daging olahan, keju olahan, minuman bersoda berwarna. Jenis ini hampir seluruhnya diserap tubuh, jadi lebih penting dibatasi dibanding fosfat alami</li></ul>
+<p>Biasakan membaca label kemasan dan hindari produk yang mencantumkan kata "phosphate" atau "fosfat".</p>
+<h3>Obat pengikat fosfat</h3>
+<ul><li>Diminum bersama suapan pertama makan, bukan setelahnya</li><li>Bila makan tidak jadi atau hanya camilan kecil, tanyakan perlu tidaknya diminum</li><li>Jangan mengubah dosis sendiri</li></ul>
+<div class="key"><strong>Poin penting:</strong> protein tetap dibutuhkan. Pilihlah sumber protein yang lebih rendah fosfat, seperti putih telur dan ikan, dan batasi olahan pabrik. Target fosfat Anda ditentukan dokter.</div>
+</div></details>
+<details><summary>Garam</summary><div><p>Garam membuat haus dan menahan air. Batasi kecap asin, terasi, ikan asin, mi instan, makanan kaleng, dan penyedap rasa. Gunakan bawang, jahe, asam, dan rempah untuk menambah rasa.</p></div></details>
+<details><summary>Protein</summary><div><p>Pasien HD membutuhkan protein yang cukup untuk menjaga otot dan daya tahan. Sumber yang baik: telur, ikan, ayam tanpa kulit, dan daging tanpa lemak, dalam porsi sesuai anjuran ahli gizi.</p></div></details>
+<h2>Boleh, batasi, hindari</h2>
+<div class="grid">
+<div class="card"><h3>Umumnya boleh</h3><ul><li>Nasi putih, roti putih</li><li>Telur, ikan, ayam</li><li>Apel, pir, nanas</li><li>Kol, timun, wortel</li></ul></div>
+<div class="card"><h3>Batasi</h3><ul><li>Buah dan sayur tinggi kalium</li><li>Susu dan olahannya</li><li>Kuah dan sup</li></ul></div>
+<div class="card"><h3>Hindari</h3><ul><li>Makanan sangat asin</li><li>Minuman bersoda berwarna</li><li>Jamu atau herbal tanpa izin dokter</li></ul></div>
+</div>
+<h2>Contoh menu harian</h2>
+<div class="ph">Contoh menu satu hari: [DISUSUN BERSAMA AHLI GIZI RS ANDA]. Porsi dan pilihan menyesuaikan kondisi tiap pasien.</div>
+<h2>Mitos vs fakta</h2>
+<div class="grid">
+<div class="card"><p><strong>Mitos:</strong> minum banyak supaya ginjal bersih.</p><p><strong>Fakta:</strong> pada pasien HD, minum banyak membebani jantung dan paru.</p></div>
+<div class="card"><p><strong>Mitos:</strong> kuah tidak dihitung.</p><p><strong>Fakta:</strong> kuah dan sup tetap dihitung sebagai cairan.</p></div>
+<div class="card"><p><strong>Mitos:</strong> tidak minum sama sekali lebih baik.</p><p><strong>Fakta:</strong> tubuh tetap butuh cairan sesuai batas dari dokter.</p></div>
+</div>
+</section>
+
+<section class="pg" id="perawatan" hidden>
+<h1>Perawatan Diri</h1>
+<p class="lead">Kebiasaan kecil setiap hari membuat HD lebih lancar dan aman.</p>
+<details open><summary>Merawat akses (fistula dan CDL)</summary><div><ul><li>Cuci tangan sebelum menyentuh area akses</li><li>Raba getaran (thrill) fistula setiap hari</li><li>Jangan mengukur tekanan darah, mengambil darah, atau memasang infus di lengan fistula</li><li>Hindari mengangkat beban berat dan tidur menindih lengan fistula</li><li>Pada CDL, jaga balutan tetap kering dan bersih</li></ul><div class="key"><strong>Segera lapor bila:</strong> getaran hilang, bengkak, merah, nyeri, keluar nanah, atau demam.</div></div></details>
+<details><summary>Obat-obatan</summary><div><ul><li>Minum obat sesuai jadwal, jangan berhenti sendiri</li><li>Obat pengikat fosfat diminum bersama makan</li><li>Tanyakan dulu sebelum memakai pereda nyeri, jamu, atau herbal</li><li>Bawa daftar obat setiap kontrol</li></ul></div></details>
+<details><summary>Anemia (darah rendah)</summary><div>
+<p>Anemia sangat umum pada pasien HD. Penyebabnya antara lain ginjal kurang membuat hormon eritropoietin (EPO) yang merangsang pembentukan sel darah merah, kekurangan zat besi, darah yang tertinggal di mesin atau terambil untuk pemeriksaan, peradangan, serta kekurangan vitamin B12 atau folat.</p>
+<h3>Gejala</h3>
+<p>Lemas, pucat, mudah lelah, pusing, sesak saat beraktivitas, jantung berdebar, dan sulit berkonsentrasi.</p>
+<h3>Pengobatan</h3>
+<ul><li>Suntikan eritropoietin (ESA), sering diberikan saat HD</li><li>Zat besi, bila cadangannya kurang</li><li>Transfusi hanya pada keadaan tertentu</li></ul>
+<div class="key"><strong>Poin penting:</strong> target Hb ditentukan dokter dan tidak perlu setinggi orang sehat; Hb terlalu tinggi justru berisiko. Jangan melewatkan suntikan atau kontrol lab.</div>
+</div></details>
+<details><summary>Zat besi</summary><div>
+<p>Zat besi dibutuhkan untuk membentuk sel darah merah. Dokter memeriksa cadangannya lewat ferritin dan saturasi transferin (TSAT). Pada pasien HD, zat besi sering diberikan lewat infus saat HD karena obat minum kurang efektif bagi banyak pasien.</p>
+<h3>Bila diberi zat besi minum</h3>
+<ul><li>Minum sesuai anjuran dokter, jangan bersamaan dengan teh, kopi, susu, atau obat pengikat fosfat berbahan kalsium karena menghambat penyerapan</li><li>Efek samping yang umum: tinja kehitaman, sembelit, dan mual</li></ul>
+<h3>Makanan sumber zat besi</h3>
+<p>Daging tanpa lemak, ikan, dan telur dapat membantu. Hindari jeroan karena tinggi fosfat. Jangan membeli suplemen zat besi sendiri; kelebihan zat besi juga tidak baik.</p>
+<div class="key"><strong>Poin penting:</strong> tanyakan hasil ferritin dan TSAT Anda saat kontrol dan apakah perlu tambahan zat besi.</div>
+</div></details>
+<details><summary>Tekanan darah</summary><div>
+<p>Tekanan darah tinggi pada pasien HD terutama disebabkan kelebihan garam dan cairan. Tekanan darah yang tidak terkontrol membebani jantung dan pembuluh darah. Dokter menetapkan <strong>berat badan kering</strong>, yaitu berat badan target setelah HD tanpa kelebihan cairan.</p>
+<h3>Cara menjaganya</h3>
+<ul><li>Kurangi garam dan patuhi batas cairan</li><li>Usahakan kenaikan berat badan antar-HD tidak melebihi anjuran dokter</li><li>Minum obat tekanan darah sesuai jadwal; tanyakan apakah boleh diminum sebelum HD, jangan memutuskan sendiri</li><li>Ukur tekanan darah di rumah: duduk tenang 5 menit, gunakan lengan tanpa fistula, pada jam yang sama, lalu catat dan bawa saat kontrol</li></ul>
+<h3>Tekanan darah turun saat HD</h3>
+<p>Pusing, mual, keringat dingin, kram, atau pandangan gelap saat HD dapat berarti tekanan darah turun, biasanya karena cairan yang ditarik terlalu banyak. Beri tahu perawat segera. Menjaga kenaikan berat badan antar-HD tetap kecil mengurangi risikonya.</p>
+<div class="key"><strong>Segera ke IGD</strong> bila tekanan darah sangat tinggi (misalnya 180/120 mmHg atau lebih) disertai sakit kepala hebat, nyeri dada, sesak, lemah satu sisi tubuh, atau bicara pelo. Target tekanan darah Anda ditentukan dokter.</div>
+</div></details>
+<details><summary>Gangguan mineral tulang: kalsium dan PTH</summary><div>
+<p>Ginjal sehat ikut mengatur kalsium, fosfat, vitamin D aktif, dan hormon paratiroid (PTH). Pada gagal ginjal, fosfat menumpuk, vitamin D aktif berkurang, dan kalsium cenderung turun. Akibatnya kelenjar paratiroid di leher memproduksi PTH berlebihan dan menarik kalsium dari tulang. Kondisi ini disebut gangguan mineral dan tulang pada penyakit ginjal kronik.</p>
+<h3>Peran masing-masing</h3>
+<ul><li><strong>Kalsium:</strong> menjaga tulang, otot, saraf, dan jantung</li><li><strong>Fosfat:</strong> bila tinggi, memicu PTH naik dan pengapuran pembuluh darah (lihat bagian Fosfat)</li><li><strong>PTH:</strong> pada pasien HD memang dijaga sedikit lebih tinggi dari orang sehat, tetapi tidak boleh terlalu tinggi maupun terlalu rendah</li><li><strong>Vitamin D aktif:</strong> membantu penyerapan kalsium dan menekan PTH</li></ul>
+<h3>Bila tidak terkendali</h3>
+<p>Nyeri tulang dan sendi, tulang rapuh dan mudah patah, gatal yang menetap, otot lemah, serta pengapuran pembuluh darah dan jantung. Kalsium terlalu rendah dapat menimbulkan kram atau kesemutan di sekitar mulut dan jari; kalsium terlalu tinggi dapat menimbulkan mual, sembelit, lemas, dan bingung.</p>
+<h3>Pemeriksaan dan pengobatan</h3>
+<ul><li>Kalsium, fosfat, dan PTH diperiksa berkala; jadwalnya ditentukan dokter</li><li>Diet rendah fosfat dan obat pengikat fosfat</li><li>Vitamin D aktif (misalnya kalsitriol) atau obat penurun PTH (kalsimimetik) bila diperlukan</li><li>Pada kasus berat yang tidak membaik, dokter dapat mempertimbangkan operasi kelenjar paratiroid</li></ul>
+<h3>Yang perlu Anda lakukan</h3>
+<ul><li>Minum obat sesuai jadwal dan jangan berhenti sendiri</li><li>Jangan membeli suplemen kalsium, vitamin D, atau antasida sendiri; sebagian mengandung kalsium, magnesium, atau aluminium</li><li>Tetap aktif dengan olahraga ringan untuk menjaga tulang dan otot</li><li>Laporkan nyeri tulang, gatal berkepanjangan, atau mudah jatuh dan patah</li></ul>
+<div class="key"><strong>Segera ke IGD</strong> bila kejang, kram atau kesemutan hebat di sekitar mulut dan jari, atau lemas disertai bingung. Target kalsium, fosfat, dan PTH Anda ditentukan dokter.</div>
+</div></details>
+<details><summary>Keluhan sehari-hari</summary><div><ul><li><strong>Gatal:</strong> jaga kulit lembap, laporkan agar fosfat diperiksa</li><li><strong>Kram:</strong> sering terkait penarikan cairan; kendalikan kenaikan berat badan antar-HD</li><li><strong>Lemas:</strong> dapat berkaitan dengan anemia atau HD kurang optimal; sampaikan ke dokter</li><li><strong>Sulit tidur:</strong> jadwal tidur teratur, kurangi kafein, laporkan bila berlanjut</li></ul></div></details>
+<details><summary>Aktivitas fisik, ibadah, dan puasa</summary><div><p>Berjalan ringan dan aktivitas yang nyaman umumnya dianjurkan. Ibadah dapat tetap dijalankan sesuai kemampuan. Untuk puasa, bicarakan dengan dokter lebih dulu karena memengaruhi cairan, obat, dan jadwal HD.</p></div></details>
+</section>
+
+<section class="pg" id="darurat" hidden>
+<div class="warn"><h1 style="margin:0 0 8px">Darurat</h1><p style="margin:0;font-size:1.2rem">Bila ragu, anggap ini darurat dan segera ke IGD.</p></div>
+<h2>Segera ke IGD jika</h2>
+<ul><li>Sesak napas, terutama saat berbaring</li><li>Nyeri dada atau berdebar-debar hebat</li><li>Bengkak mendadak di wajah, kaki, atau perut</li><li>Sangat lemas, hampir pingsan, atau kesadaran menurun</li><li>Perdarahan dari akses yang tidak berhenti</li></ul>
+<h2>Bila terlewat jadwal HD</h2>
+<ul><li>Hubungi unit HD secepatnya untuk mengatur jadwal pengganti</li><li>Batasi minum dan hindari makanan tinggi kalium sampai HD berikutnya</li><li>Bila muncul sesak atau nyeri dada, langsung ke IGD</li></ul>
+</section>
+
+<section class="pg" id="komunitas" hidden>
+<h1>Komunitas &amp; Layanan</h1>
+<p class="lead">Anda tidak sendirian menjalani HD.</p>
+<details open><summary>Panduan untuk keluarga dan pendamping</summary><div><ul><li>Ikut mendengar penjelasan dokter dan ahli gizi</li><li>Bantu mengingat jadwal HD, obat, dan batas cairan</li><li>Dampingi tanpa mengambil alih; hargai kemandirian pasien</li><li>Jaga kesehatan diri sendiri sebagai pendamping</li></ul></div></details>
+<details><summary>Kesehatan jiwa dan dukungan</summary><div><p>Merasa sedih, cemas, atau jenuh menjalani HD adalah hal yang umum. Bicarakan dengan keluarga, sesama pasien, atau dokter. Bila perasaan tertekan berlangsung lama atau terasa putus asa, segera minta bantuan dokter atau psikolog.</p></div></details>
+<details><summary>BPJS dan rujukan</summary><div class="ph">[ISI ALUR BPJS, RUJUKAN, DAN SYARAT ADMINISTRASI SESUAI RS ANDA]</div></details>
+<details><summary>Direktori unit HD (untuk bepergian)</summary><div class="ph">[DAFTAR UNIT HD: NAMA, KOTA, KONTAK]. Hubungi unit tujuan jauh hari sebelum bepergian.</div></details>
+<details><summary>Cerita pasien dan keluarga</summary><div class="ph">[CERITA PASIEN, DITULIS DENGAN IZIN DAN TANPA IDENTITAS]</div></details>
+<details><summary>Ingin memantau hasil lab?</summary><div><p>Gunakan halaman <a href="#lab">Lab</a> untuk memasukkan nilai lab dan melihat apakah naik, turun, atau normal.</p></div></details>
+</section>
+
+<section class="pg" id="lab" hidden>
+<h1>Lab</h1>
+<p class="lead">Masukkan nilai hasil lab terbaru Anda. Status naik, turun, atau normal muncul otomatis.</p>
+<div class="card">
+<p id="labprof" style="color:var(--mut);margin:0 0 4px"></p>
+<div id="labrows"></div>
+<div class="lr" style="grid-template-columns:1fr"><div><span class="nm">GFR (perkiraan)</span><span class="nr">Nilai normal: &ge; 90 mL/menit/1,73 m&sup2;</span></div><div class="row" style="gap:6px 12px"><b id="gv" style="font-size:1.5rem">-</b><span id="gu" style="color:var(--mut)">mL/menit/1,73 m&sup2;</span><span class="bd" id="gb"></span></div><p id="gn" style="margin:0;color:var(--mut);font-size:1rem">Isi serum kreatinin, usia, dan jenis kelamin untuk menghitung GFR.</p></div>
+<div class="row" style="margin-top:14px"><button class="btn" type="button" id="labclr">Hapus semua nilai</button></div>
+</div>
+<div class="row" style="margin:12px 0 0;gap:8px 16px;font-size:1rem"><span class="bd h">&#9650; Naik</span><span class="bd l">&#9660; Turun</span><span class="bd n">&#9679; Normal</span></div>
+<div class="key"><strong>Penting:</strong> nilai normal di atas adalah rentang umum untuk dewasa. Target pada pasien HD bisa berbeda, seperti Hb, kalsium, dan fosfat. Diskusikan hasil lab Anda dengan dokter. GFR dihitung dengan rumus CKD-EPI 2021 dan tidak akurat untuk pasien yang sudah menjalani HD. Data hanya tersimpan di perangkat ini.</div>
+<p style="color:var(--mut);font-size:1rem">Disusun oleh Puguh Widagdo, SpPD-FINASIM, Fellowship Hemodialisis bersama Tim HD RSUD RT. NOTOPURO SIDOARJO.</p>
+</section>
+
+</main></div>
+<footer>
+<p>Informasi di website ini bersifat edukasi dan tidak menggantikan konsultasi dengan dokter Anda. Disusun berdasarkan [RUJUKAN PEDOMAN, PERNEFRI DAN KDOQI]. Disusun oleh Puguh Widagdo, SpPD-FINASIM, Fellowship Hemodialisis bersama Tim HD RSUD RT. NOTOPURO SIDOARJO. Terakhir diperbarui Oktober 2026.</p>
+<p>Tentang kami · Kebijakan privasi · Kontak dan masukan</p>
+</footer>
+<nav class="bot" aria-label="Menu cepat"><a href="#beranda"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Beranda</a><a href="#mengenal"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19a2 2 0 0 1 2-2h13"/></svg>Belajar</a><a href="#makan"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Makan</a><a href="#perawatan"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.5-8 11-8 11z"/></svg>Rawat</a><a href="#lab"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6l-5.5 9.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3"/></svg>Lab</a></nav>
+<div class="sos"><span>Sesak napas atau nyeri dada?</span><a href="#darurat">Lihat langkah darurat</a></div>
+<script>
+(function(){
+var ids=['beranda','mengenal','makan','perawatan','darurat','komunitas','lab'];
+function show(){var h=location.hash.slice(1);if(ids.indexOf(h)<0)h='beranda';
+document.querySelectorAll('.pg').forEach(function(s){s.hidden=s.id!==h});
+document.querySelectorAll('nav a').forEach(function(a){if(a.getAttribute('href')==='#'+h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+window.scrollTo(0,0)}
+window.addEventListener('hashchange',show);show();
+var size=100;try{size=parseInt(localStorage.getItem('fs'))||100}catch(e){}
+function setSize(v){size=Math.max(90,Math.min(150,v));document.documentElement.style.fontSize=size+'%';try{localStorage.setItem('fs',size)}catch(e){}}
+setSize(size);
+document.getElementById('fp').onclick=function(){setSize(size+10)};
+document.getElementById('fm').onclick=function(){setSize(size-10)};
+var tips=['Timbang berat badan setiap pagi pada jam yang sama.','Kurangi garam: ini cara terbaik mengurangi rasa haus.','Raba getaran fistula Anda setiap hari.','Bawa daftar obat setiap kali kontrol.','Datang tepat waktu setiap jadwal HD.'];
+document.getElementById('tip').textContent=tips[Math.floor(Date.now()/864e5)%tips.length];
+var total=0,lim=document.getElementById('lim'),bar=document.getElementById('bar');
+function draw(){window.__t=total;setTimeout(function(){window.dispatchEvent(new Event('fluid'))},0);var l=parseInt(lim.value)||0,pct=l>0?Math.min(100,Math.round(total/l*100)):0;
+document.getElementById('fill').style.width=pct+'%';bar.setAttribute('aria-valuenow',pct);
+bar.className='bar'+(l>0&&total>l?' over':'');
+document.getElementById('stat').textContent=l<=0?'Isi batas cairan Anda terlebih dahulu.':(total>l?'Terpakai '+total+' ml. Sudah melewati batas '+(total-l)+' ml. Hubungi perawat bila sesak atau bengkak.':'Terpakai '+total+' ml dari '+l+' ml. Sisa '+(l-total)+' ml.')}
+document.querySelectorAll('[data-add]').forEach(function(b){b.onclick=function(){total+=parseInt(b.getAttribute('data-add'));draw()}});
+document.getElementById('rst').onclick=function(){total=0;draw()};
+lim.oninput=draw;draw();
+
+var gr=[[0,0,1],[0,0,1],[0,1,2],[1,2,2],[2,2,2],[2,2,2]],gn=['rendah','sedang','tinggi','sangat tinggi'],gnm=['G1','G2','G3a','G3b','G4','G5'];
+document.getElementById('gcek').onclick=function(){var e=parseFloat(document.getElementById('ge').value),u=parseFloat(document.getElementById('gu').value),o=document.getElementById('hasil');
+if(isNaN(e)||isNaN(u)||e<=0||u<0){o.textContent='Isi eGFR dan uACR dengan angka yang valid.';return}
+var g=e>=90?0:e>=60?1:e>=45?2:e>=30?3:e>=15?4:5,a=u<30?0:u<=300?1:2,r=gr[g][a];
+var lv=[0,1,2,3];var idx=(g<=1&&a===0)?0:(g<=1&&a===1)?1:(g<=1&&a===2)?2:(g===2&&a===0)?1:(g===2&&a===1)?2:(g===2&&a===2)?3:(g===3&&a===0)?2:3;
+o.textContent='Kategori '+gnm[g]+' A'+(a+1)+': risiko '+gn[idx]+'. Konsultasikan dengan dokter Anda.'};
+})();
+</script>
+<script>
+(function(){
+var IT=[
+{k:'hb',n:'Hemoglobin (Hb)',u:'g/dL',m:[13,17],f:[12,15]},
+{k:'leu',n:'Leukosit (Leu)',u:'/\u00b5L',r:[4000,10000],big:1},
+{k:'plt',n:'Trombosit',u:'/\u00b5L',r:[150000,400000],big:1},
+{k:'bun',n:'BUN',u:'mg/dL',r:[7,20]},
+{k:'sk',n:'Serum kreatinin (SK)',u:'mg/dL',m:[0.7,1.3],f:[0.6,1.1]},
+{k:'rethe',n:'Ret-He',u:'pg',r:[28,35]},
+{k:'ca',n:'Kalsium (Ca)',u:'mg/dL',r:[8.6,10.2]},
+{k:'po4',n:'Fosfat',u:'mg/dL',r:[2.5,4.5]}];
+var K='lab',d={},box=document.getElementById('labrows'),pj=document.getElementById('pj'),pu=document.getElementById('pu'),ref={};
+try{d=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
+function F(n){var t=(Math.round(n*100)/100).toString().split('.');t[0]=t[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.');return t.join(',')}
+function sx(){return pj.value==='Laki-laki'?'m':pj.value==='Perempuan'?'f':''}
+function rg(it,s){return it.r||(s==='m'?it.m:s==='f'?it.f:null)}
+function nrt(it,s){var r=rg(it,s);if(r)return 'Normal: '+F(r[0])+' - '+F(r[1])+' '+it.u+(it.m?(s==='m'?' (laki-laki)':' (perempuan)'):'');return 'Normal: L '+F(it.m[0])+' - '+F(it.m[1])+' / P '+F(it.f[0])+' - '+F(it.f[1])+' '+it.u}
+function num(t,it){t=(t||'').trim();if(!t)return null;if(it.big&&/^\d{1,3}(\.\d{3})+$/.test(t))t=t.replace(/\./g,'');else t=t.replace(',','.');var v=parseFloat(t);return v>0?v:null}
+function badge(el,c,t){el.className='bd'+(c?' '+c:'');el.textContent=t}
+IT.forEach(function(it){var row=document.createElement('div');row.className='lr';
+row.innerHTML='<div><span class="nm"></span><span class="nr"></span></div><input type="text" inputmode="decimal" autocomplete="off"><span class="bd"></span>';
+row.querySelector('.nm').textContent=it.n;var inp=row.querySelector('input');inp.setAttribute('aria-label',it.n+' ('+it.u+')');inp.placeholder=it.u;
+if(d[it.k])inp.value=d[it.k];
+inp.addEventListener('input',function(){d[it.k]=inp.value;try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}upd()});
+box.appendChild(row);ref[it.k]={nr:row.querySelector('.nr'),inp:inp,bd:row.querySelector('.bd')}});
+function upd(){var s=sx(),age=parseFloat(pu.value),pr=[];
+if(pj.value)pr.push(pj.value);if(age>0)pr.push(age+' tahun');
+document.getElementById('labprof').textContent=pr.length?'Data profil: '+pr.join(', ')+'.':'Lengkapi usia dan jenis kelamin di profil pada Beranda untuk menilai Hb, kreatinin, dan GFR.';
+var skv=null;
+IT.forEach(function(it){var r=ref[it.k];r.nr.textContent=nrt(it,s);var v=num(r.inp.value,it),cv=false;
+if(v===null){badge(r.bd,'','');return}
+if(it.big&&v<1000){v*=1000;cv=true}
+if(it.k==='sk')skv=v;
+var g=rg(it,s);if(!g){badge(r.bd,'x','Pilih jenis kelamin di profil (Beranda)');return}
+var c=v<g[0]?'l':v>g[1]?'h':'n',t=c==='l'?'\u25bc Turun':c==='h'?'\u25b2 Naik':'\u25cf Normal';
+badge(r.bd,c,t+(cv?' (dibaca '+F(v)+')':''))});
+var gv=document.getElementById('gv'),gb=document.getElementById('gb'),gn=document.getElementById('gn');
+if(skv===null||!(age>0)||!s){gv.textContent='-';badge(gb,'','');gn.textContent='Isi serum kreatinin, usia, dan jenis kelamin untuk menghitung GFR.';return}
+var f=s==='f',k=f?0.7:0.9,a=f?-0.241:-0.302,e=142*Math.pow(Math.min(skv/k,1),a)*Math.pow(Math.max(skv/k,1),-1.2)*Math.pow(0.9938,age)*(f?1.012:1);
+var gx=e>=90?['n','\u25cf Normal (G1)']:e>=60?['l','\u25bc Turun ringan (G2)']:e>=45?['h','\u25bc Turun (G3a)']:e>=30?['h','\u25bc Turun (G3b)']:e>=15?['h','\u25bc Turun berat (G4)']:['h','\u25bc Turun sangat berat (G5)'];
+gv.textContent=F(Math.round(e*10)/10);badge(gb,gx[0],gx[1]);gn.textContent='Dihitung dari serum kreatinin, usia, dan jenis kelamin (CKD-EPI 2021).'}
+pj.addEventListener('change',upd);pj.addEventListener('input',upd);pu.addEventListener('input',upd);
+document.getElementById('labclr').onclick=function(){d={};try{localStorage.removeItem(K)}catch(e){}IT.forEach(function(it){ref[it.k].inp.value=''});upd()};
+upd();
+})();
+</script>
+<script>
+(function(){
+var root=document.documentElement,sv=null;try{sv=localStorage.getItem('th')}catch(e){}
+if(sv)root.setAttribute('data-theme',sv);
+document.getElementById('th').onclick=function(){var c=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'),n=c==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('th',n)}catch(e){}};
+var lim=document.getElementById('lim');
+window.addEventListener('fluid',function(){var t=window.__t||0,l=parseInt(lim.value)||0;document.getElementById('s1').textContent=t+' ml';document.getElementById('s2').textContent=l>0?(t>l?'Lewat '+(t-l)+' ml':(l-t)+' ml'):'-'});
+var K='bb7',data=[];try{data=JSON.parse(localStorage.getItem(K))||[]}catch(e){}
+function f(n){return n.toFixed(1).replace('.',',')}
+function draw(){var svg=document.getElementById('chart'),d=data.slice(-7),a=document.getElementById('s3'),b=document.getElementById('s3d');
+if(!d.length){svg.innerHTML='<text x="160" y="68" text-anchor="middle" font-size="13" style="fill:var(--mut)">Belum ada catatan</text>';a.textContent='-';b.textContent='';return}
+var ws=d.map(function(x){return x.w}),lo=Math.min.apply(null,ws)-0.5,hi=Math.max.apply(null,ws)+0.5;
+function X(i){return d.length>1?24+i*(272/(d.length-1)):160}function Y(w){return 105-(w-lo)/(hi-lo)*80}
+var pts=d.map(function(x,i){return X(i)+','+Y(x.w)}).join(' ');
+var h='<line x1="12" y1="112" x2="308" y2="112" style="stroke:var(--line)" stroke-width="1"/><polyline points="'+pts+'" fill="none" style="stroke:var(--pri)" stroke-width="2.5" stroke-linejoin="round"/>';
+d.forEach(function(x,i){h+='<circle cx="'+X(i)+'" cy="'+Y(x.w)+'" r="4" style="fill:var(--pri)"/><text x="'+X(i)+'" y="'+(Y(x.w)-9)+'" text-anchor="middle" font-size="10" style="fill:var(--ink)">'+f(x.w)+'</text><text x="'+X(i)+'" y="126" text-anchor="middle" font-size="9" style="fill:var(--mut)">'+x.d.slice(8)+'/'+x.d.slice(5,7)+'</text>'});
+svg.innerHTML=h;var l=d[d.length-1];a.textContent=f(l.w)+' kg';
+if(d.length>1){var df=l.w-d[d.length-2].w;b.textContent=(df>=0?'+':'')+f(df)+' kg dari catatan sebelumnya'}else b.textContent=''}
+document.getElementById('bsv').onclick=function(){var v=parseFloat(document.getElementById('bb').value);if(isNaN(v)||v<20||v>250)return;
+var t=new Date().toISOString().slice(0,10);data=data.filter(function(x){return x.d!==t});data.push({d:t,w:v});data=data.slice(-30);try{localStorage.setItem(K,JSON.stringify(data))}catch(e){}document.getElementById('bb').value='';draw()};
+draw();
+})();
+</script>
+<script>
+(function(){
+var K='prof',ids={n:'pn',u:'pu',j:'pj',b:'pb',t:'pt'},d={};
+try{d=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
+function f(n){return n.toFixed(1).replace('.',',')}
+function calc(){var b=parseFloat(d.b),t=parseFloat(d.t),v=document.getElementById('bmiv'),c=document.getElementById('bmic'),k=document.getElementById('bmk');
+if(!(b>=20&&b<=300&&t>=100&&t<=250)){v.textContent='-';c.textContent='Isi berat dan tinggi badan.';k.style.display='none';return}
+var m=b/Math.pow(t/100,2),cat=m<18.5?'Berat badan kurang':m<23?'Normal':m<25?'Berat badan lebih (berisiko)':m<30?'Obesitas I':'Obesitas II';
+v.textContent=f(m);c.textContent=cat;k.style.display='block';k.style.left=Math.max(0,Math.min(100,(m-12)/28*100))+'%'}
+Object.keys(ids).forEach(function(x){var el=document.getElementById(ids[x]);if(d[x]!=null)el.value=d[x];
+var h=function(){d[x]=el.value;try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}calc()};el.addEventListener('input',h);el.addEventListener('change',h)});
+calc();
+})();
+</script>
+<script>
+(function(){
+var dp=null,btn=document.getElementById('instbtn'),box=document.getElementById('inst'),hp=document.getElementById('insth');
+var inst=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+if(inst)box.hidden=true;
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e});
+window.addEventListener('appinstalled',function(){box.hidden=true;dp=null});
+btn.onclick=function(){if(dp){dp.prompt();dp.userChoice.then(function(){dp=null},function(){})}else{hp.hidden=!hp.hidden}};
+var ask=document.getElementById('rstask');
+document.getElementById('rstbtn').onclick=function(){ask.hidden=false};
+document.getElementById('rstno').onclick=function(){ask.hidden=true};
+document.getElementById('rstyes').onclick=function(){['prof','lab','bb7'].forEach(function(k){try{localStorage.removeItem(k)}catch(e){}});location.reload()};
+})();
+</script>
+</body>
+</html>
